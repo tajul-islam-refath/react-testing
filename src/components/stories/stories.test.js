@@ -1,31 +1,37 @@
+import React from "react";
+import axios from "axios";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import axios from "axios";
 
 import Stories from "./Stories.jsx";
 
 jest.mock("axios");
 
-describe("stories api test suit", function () {
-  test("fetches stories from an API and displays them", async function () {
-    let stories = [
-      { objectID: "1", title: "title one" },
-      { objectID: "2", title: "title tow" },
-      { objectID: "3", title: "title three" },
+describe("Stories", () => {
+  test("fetches stories from an API and displays them", async () => {
+    const stories = [
+      { objectID: "1", title: "Hello" },
+      { objectID: "2", title: "React" },
     ];
 
-    let promice = Promise.resolve({ data: { hits: stories } });
-    await axios.get.mockImplementationOnce(() => promice);
+    const promise = Promise.resolve({ data: { hits: stories } });
+
+    axios.get.mockImplementationOnce(() => promise);
 
     render(<Stories />);
 
+    userEvent.click(screen.getByRole("button"));
+
+    // await act(() => promise);
+
+    expect(await screen.findAllByRole("listitem")).toHaveLength(2);
+  });
+
+  test("fetches stories from an API and fails", async () => {
+    axios.get.mockImplementationOnce(() => Promise.reject(new Error()));
+    render(<Stories />);
+
     await userEvent.click(screen.getByRole("button"));
-
-    await act(() => promice);
-    await screen.getAllByRole("listitem").toHaveLength(0);
-
-    let items = await screen.findAllByRole("listitem");
-
-    expect(items).toHaveLength(3);
+    expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
   });
 });

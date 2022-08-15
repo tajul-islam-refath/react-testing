@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Body from "./components/Body";
 import Login from "./components/login/Login";
 import Search from "./components/search/Search";
@@ -7,14 +8,14 @@ import Stories from "./components/stories/Stories";
 function App() {
   return (
     <div className="App">
-      {/* <Body title="Learning React" /> */}
-      {/* <Login /> */}
-      <div className="container my-5">
-        <div className="d-flex justify-content-center">
-          <Search>Search for </Search>
-        </div>
-        <Stories />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          {/* <Body title="Learning React" /> */}
+
+          <Route path="/" element={<Stories />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Login() {
             <div className="card-body">
               <form>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Email address</label>
+                  <label htmlFor="exampleInputEmail1">Email</label>
                   <input
                     type="email"
                     className="form-control"
