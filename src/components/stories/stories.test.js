@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 
 import Stories from "./Stories.jsx";
 
+// mock axios for api test
 jest.mock("axios");
 
 describe("Stories", () => {
