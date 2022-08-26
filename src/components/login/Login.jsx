@@ -1,6 +1,9 @@
-import React from "react";
+import { useState } from "react";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="container">
       <div className="row mt-5">
@@ -15,6 +18,8 @@ function Login() {
                     className="form-control"
                     id="exampleInputEmail1"
                     placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -24,9 +29,14 @@ function Login() {
                     className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary mt-2">
+                <button
+                  type="submit"
+                  className="btn btn-primary mt-2"
+                  disabled={email && password ? false : true}>
                   Login
                 </button>
               </form>

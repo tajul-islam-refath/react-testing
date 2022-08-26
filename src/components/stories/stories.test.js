@@ -22,8 +22,6 @@ describe("Stories", () => {
 
     userEvent.click(screen.getByRole("button"));
 
-    // await act(() => promise);
-
     expect(await screen.findAllByRole("listitem")).toHaveLength(2);
   });
 
@@ -31,7 +29,7 @@ describe("Stories", () => {
     axios.get.mockImplementationOnce(() => Promise.reject(new Error()));
     render(<Stories />);
 
-    await userEvent.click(screen.getByRole("button"));
+    userEvent.click(screen.getByRole("button"));
     expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
   });
 });
